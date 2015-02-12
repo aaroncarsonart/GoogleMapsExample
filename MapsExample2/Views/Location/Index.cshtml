@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MapsExample2.Models.Location>
+
+@{
+    ViewBag.Title = "Locations";
+}
+<!-- ######################################################### -->
+<!-- Google Maps Scripting -->
+<!-- ######################################################### -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+    // 1. Define a function to add the markers.
+    function addMarker(latitude, longitude, title, map) {
+        marker = new google.maps.InfoWindow({
+            position: new google.maps.LatLng(latitude, longitude),
+            map: map
+        });
+    }
+
+    // 2. Initialize the Map details.
+    function initialize() {
+        var mapProp = {
+            center: new google.maps.LatLng(44.306509, -120.508111),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+        // 3. Add the markers.
+        @foreach (var item in Model) {
+            @:var marker = new google.maps.Marker({position: new google.maps.LatLng(@item.Latitude, @item.Longitude), map: map});
+        }
+    }
+
+    // 4. Display the Map.
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+
+<!-- ######################################################### -->
+<!-- Regular View Coding -->
+<!-- ######################################################### -->
+
+<h2>Locations</h2>
+
+<!-- The Map is displayed here -->
+<div class="row">
+    <div class="col-md-12">
+        <!--<div id="googleMap" style="width:600px;height:300px;"></div>-->
+        <div id="googleMap" style="width:100%;height:300px;"></div>
+    </div>
+</div>
+
+
+<p>
+    <br />This is a succinct example of displaying some basic functionality in a MVC Razor
+    view.  I used coding suggestions from <a href="http://www.w3schools.com/googleAPI/">
+    w3schools</a> and <a href="http://stackoverflow.com/questions/4599169/using-razor-within-javascript">
+    stack overflow</a>. 
+</p>
+<p>
+    To display a marker on the map, you need to know he latitude and longitude
+    coordinate values.  There is also a Google API for 
+    <a href="https://developers.google.com/maps/documentation/geocoding/">geocoding</a>,
+    which allows for translation back and forth between coordinates and an address.
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Label)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Label)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
