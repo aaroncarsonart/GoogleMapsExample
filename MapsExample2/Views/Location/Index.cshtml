@@ -44,57 +44,69 @@
 <div class="row">
     <div class="col-md-12">
         <div id="googleMap" style="width:100%;height:300px;"></div>
+        <p></p>
     </div>
 </div>
 
 
-<p>
-    <br />This is a succinct example of displaying some basic functionality in a MVC Razor
-    view.  I used coding suggestions from <a href="http://www.w3schools.com/googleAPI/">
-    w3schools</a> and <a href="http://stackoverflow.com/questions/4599169/using-razor-within-javascript">
-    stack overflow</a>. 
-</p>
-<p>
-    To display a marker on the map, you need to know he latitude and longitude
-    coordinate values.  There is also a Google API for 
-    <a href="https://developers.google.com/maps/documentation/geocoding/">geocoding</a>,
-    which allows for translation back and forth between coordinates and an address.
-</p>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Label)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            This is a succinct example of displaying some basic functionality in a MVC Razor
+            view.  I used coding suggestions from <a href="http://www.w3schools.com/googleAPI/">
+            w3schools </a> and <a href="http://stackoverflow.com/questions/4599169/using-razor-within-javascript">
+                stack overflow</a>.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <p>
+            To display a marker on the map, you need to know he latitude and longitude
+            coordinate values.  There is also a Google API for
+            <a href="https://developers.google.com/maps/documentation/geocoding/">geocoding</a>,
+            which allows for translation back and forth between coordinates and an address.
+        </p>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Label)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
 
+        </table>
+    </div>
+</div>
